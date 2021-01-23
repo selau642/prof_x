@@ -19,7 +19,7 @@ export let insert_bot_into_i_from_left = {
         let { fr_nt } = In.getProps(["fr_nt"])
         let i_list = ["sym", "num", "br"]
         if( i_list.indexOf( fr_nt.type ) > -1
-        && top.list.lenght == 1
+        && top.list.length == 1
         && top_i.props.text == '1' ){
             return true
         } else {
