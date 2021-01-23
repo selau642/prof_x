@@ -25,24 +25,39 @@ export let u = {
         return {
             left:() =>{
                 // move <<==
+                // [0,{1,2},3] --> [ {1,2}, 0, 3]
+                // transfer 0 to new position
+                let first_tree = tree_list[0]
+                
+                let tree_length = tree_list.length
                 let p_tree = tree_list[0].parentNode
-                for( let item of tree_list )
-                {
-                    let tree_name = item.name
-                    let index = p_tree.list.indexOf( tree_name )
-                    p_tree.list.splice( index, 1 )
-                    p_tree.list.splice( index - 1, 0, tree_name )
+                let first_tree_index = 
+                    p_tree.list.indexOf( first_tree.name )
+                
+                if( first_tree_index - 1 > -1 ){
+                    let [ tree_name ] = p_tree.list
+                            .splice( first_tree_index - 1, 1)
+                    let end_index = first_tree_index + tree_length - 1 
+                    p_tree.list.splice( end_index, 0, tree_name )
                 }
             },
             right:() =>{
                 // move <<==
+                // [0,{1,2},3] --> [ 0, 3, {1,2}]
+                // transfer 3 to new position
+                let last_tree = tree_list[ tree_list.length - 1]
+
+                let tree_length = tree_list.length
                 let p_tree = tree_list[0].parentNode
-                for( let item of tree_list )
-                {
-                    let tree_name = item.name
-                    let index = p_tree.list.indexOf( tree_name )
-                    p_tree.list.splice( index, 1 )
-                    p_tree.list.splice( index + 1, 0, tree_name )
+
+                let last_tree_index = 
+                    p_tree.list.indexOf( last_tree.name )
+                
+                if( last_tree_index + 1 < p_tree.list.length ){
+                    let [ tree_name ] = p_tree.list
+                        .splice( last_tree_index + 1, 1)
+                    let start_index = last_tree_index - tree_length + 1 
+                    p_tree.list.splice( start_index, 0, tree_name )
                 }
             }            
         }
@@ -538,7 +553,7 @@ export let u = {
                             paste_tree: bot,
                             paste_index: paste_index,
                             new_props: {
-                                arrow_type: "top_i",
+                                arrow_type: "bottom_i",
                                 show_arrow: true
                                 // show_arrow: bot_show_arrow 
                             }
