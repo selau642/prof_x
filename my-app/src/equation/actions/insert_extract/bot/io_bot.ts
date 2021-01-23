@@ -1,3 +1,4 @@
+import { debug } from "svelte/internal";
 import type { interaction } from "../../interaction";
 import type { Tree, Border } from '../../types/main'
 import { u } from "../../utils/ui.js"
@@ -9,9 +10,16 @@ export let insert_bot_into_bot_from_left = {
     name: "insert.bot.into_bot.from_left",
     tree_type_list: ["bot"],
     isInContext: function(In: interaction): boolean {
+        let { p_tree:fr } = In
         let { fr_nt } = In.getProps(["fr_nt"])
         
-        if( fr_nt.type == "fr" ){
+        let top = fr["top_1"]
+        let top_i = top[ top.list[0] ]
+
+        if( fr_nt.type == "fr"
+        && top.list.length == 1 
+        && top_i.props.text == "1" ){
+
             return true
         } else {
             return false
@@ -53,9 +61,15 @@ export let insert_bot_into_bot_from_right = {
     name: "insert.bot.into_bot.from_right",
     tree_type_list: ["bot"],
     isInContext: function(In: interaction): boolean {
-        let { p_tree_pt } = In.getProps(["p_tree_pt"])
-        
-        if( p_tree_pt.type == "fr" ){
+        let { fr_pt } = In.getProps(["fr_pt"])
+        let { p_tree: fr } = In
+
+        let top = fr["top_1"]
+        let top_i = top[ top.list[0] ]
+
+        if( fr_pt.type == "fr"
+        && top.list.length == 1
+        && top_i.props.text == "1" ){
             return true
         } else {
             return false
@@ -71,6 +85,9 @@ export let insert_bot_into_bot_from_right = {
             let { fr_pt } = In.getProps(["fr_pt"])
 
             let nt_bot = fr_pt['bot_1']
+            let dt = dt_list[0] 
+            // let child_list = dt.list.map( tree_name => dt[ tree_name ])
+
             u.cutAllChildOf( dt_list )
             .paste()
             .into( nt_bot )
