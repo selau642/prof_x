@@ -43,6 +43,13 @@ export let extract_i_out_of_bot_from_left = {
             .into( new_bot )
             .at("start")
 
+            for( let tree of dt_list ){
+                tree.props.show_arrow = false
+                tree.updateProps()
+            }
+
+            new_bot.props.show_arrow = true
+            new_bot.props.selected = true
             // new_bot not yet rendered no updateProps
             // new_bot.updateProps()
             p_fr.updateProps()
@@ -94,7 +101,15 @@ export let extract_i_out_of_bot_from_right = {
             .paste()
             .into( new_bot )
             .at("start")
+            
+            for( let tree of dt_list ){
+                tree.props.show_arrow = false
+                tree.updateProps()
+            }
 
+            new_bot.props.show_arrow = true
+            new_bot.props.selected = true
+ 
             // new_bot.updateProps()
             p_fr.updateProps()
             return [ new_bot ] 
