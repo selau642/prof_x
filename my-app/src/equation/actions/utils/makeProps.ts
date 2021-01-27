@@ -446,4 +446,56 @@ export class makeProps{
         
         return arrow_to_border
     }
+    /** Distance from arrow to top 
+     *  1. top arrow to top border
+     *  2. bottom arrow to top border
+     */
+    arrow_to_top( In: interaction ){
+        let { 
+                height: dc_height, // drag_clone_height 
+                arrow_direction, 
+                mouse_start_y,
+                elem_start_y,
+            } = In.drag_clone
+
+        let top_shift
+        if( arrow_direction == 'top')
+        {
+            // elem_start_y - mouse_start_y > 0
+            top_shift = elem_start_y - mouse_start_y
+        }
+        else if( arrow_direction == 'bottom')
+        {
+            // elem_start_y - mouse_start_y < 0
+            top_shift = elem_start_y - mouse_start_y
+        }
+        
+        return top_shift 
+    }
+    /** Distance from arrow to bottom 
+     *  1. top arrow to bottom border
+     *  2. bottom arrow to bottom border
+     */
+    arrow_to_bottom( In: interaction ){
+        let { 
+                height: dc_height, // drag_clone_height 
+                arrow_direction, 
+                mouse_start_y,
+                elem_start_y,
+            } = In.drag_clone
+
+        let bottom_shift 
+        if( arrow_direction == 'top')
+        {
+            // elem_start_y - mouse_start_y > 0
+            bottom_shift = elem_start_y + dc_height - mouse_start_y
+        }
+        else if( arrow_direction == 'bottom')
+        {
+            // elem_start_y - mouse_start_y < 0
+            bottom_shift = elem_start_y + dc_height - mouse_start_y
+        }
+        
+        return bottom_shift 
+    }
 }

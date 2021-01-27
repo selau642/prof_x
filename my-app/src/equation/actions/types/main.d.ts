@@ -38,7 +38,8 @@ export interface Border{
     left?: number
     direction?: Grid_Direction
     updateUI( In: interaction ): Tree[] 
-    afterRenderUI?( In: interaction ): void
+    // afterRenderUI?( In: interaction ): void
+    svelte_tick?( In: interaction ): void
     // [key: grid_direction ]: Array<any>
 }
 

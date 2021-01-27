@@ -1,5 +1,5 @@
 import { op } from '../xTree.js'
-
+import { tick } from 'svelte'
 //reset everytime drag start
 export let u = {
     // activated_tree: false,
@@ -1221,6 +1221,7 @@ export let u = {
             item_name: sub_i.type 
         }
     },
+    /** set tree marginTop and paddingTop = 0 */
     removeMargin: function( tree )
     {
 
@@ -1504,6 +1505,19 @@ export let u = {
     removeThisTree: function( tree ){
         op.removeThisTree( tree )
         return this
+    },
+    tick: async function(){
+        await tick()
+    },
+    removeFr: async function( fr ){
+        let p_tree = fr.parentNode
+        this.bubbleUp( p_tree )
+            .andForEachRun([
+                this.remove( fr )
+                .fromEachItem // each bubble p_tree                            
+                ])
+
+        this.removeThisTree( fr )
     }
 }
 
@@ -1586,4 +1600,5 @@ function makeFractionUnder( eq )
 
         return bot
     }
+    
 }

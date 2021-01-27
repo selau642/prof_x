@@ -78,7 +78,14 @@ function set_interaction()
 
     In.addAction( flip.top.down )
     In.addAction( flip.top_i.down )
+    In.addAction( flip.bot.up )
+    In.addAction( flip.bot_i.up )
 
+    In.addAction( flip.bot.down )
+    In.addAction( flip.bot_i.down )
+    In.addAction( flip.top.up )
+    In.addAction( flip.top_i.up )
+    
     In.addAction( insert.bot.into.i.from_left )
     In.addAction( insert.bot.into.i.from_right )
 
@@ -391,7 +398,7 @@ export class interaction {
 
         this.isUpdatingTree = true
 
-        let new_de_list = border_crossed.updateUI( this )
+        let new_de_list = await border_crossed.updateUI( this )
 
         let that = this
 

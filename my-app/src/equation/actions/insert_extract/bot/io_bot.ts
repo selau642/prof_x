@@ -19,16 +19,19 @@ export let insert_bot_into_bot_from_left = {
         if( fr_nt.type == "fr"
         && top.list.length == 1 
         && top_i.props.text == "1" ){
-
             return true
         } else {
             return false
         }
     },
     makeBorder: function( In: interaction): Border | Border[] {
-        let { p_tree } = In
-        let { right } = document.getElementById( p_tree.full_name )
-                            .getBoundingClientRect()
+        let { p_tree: fr } = In
+        let { arrow_to_top } = In.getProps(["arrow_to_top"])
+        let top = fr["top_1"]
+
+        let { bottom, right } = document
+                    .getElementById( top.full_name )
+                    .getBoundingClientRect()
 
         let updateUI = function( In: interaction): Tree[]{
             let { dt_list, p_tree:fr } = In
@@ -41,7 +44,7 @@ export let insert_bot_into_bot_from_left = {
             .into( nt_bot )
             .at("start")
 
-            u.removeThisTree( p_tree )
+            u.removeThisTree( fr )
 
             nt_bot.updateProps()
             p_fr.updateProps()
@@ -52,7 +55,8 @@ export let insert_bot_into_bot_from_left = {
         return { 
             name: this.name,
             updateUI,
-            right 
+            right,
+            bottom: bottom - arrow_to_top
         }
     }
 }
@@ -76,9 +80,12 @@ export let insert_bot_into_bot_from_right = {
         }
     },
     makeBorder: function( In: interaction): Border | Border[] {
-        let { p_tree } = In
-        let { left } = document.getElementById( p_tree.full_name )
-                            .getBoundingClientRect()
+        let { p_tree: fr } = In
+        let { arrow_to_top } = In.getProps(["arrow_to_top"])
+        let top = fr["top_1"]
+        let { bottom, left } = document.getElementById( top.full_name )
+                    .getBoundingClientRect()
+
         let updateUI = function( In: interaction): Tree[]{
             let { dt_list, p_tree: fr } = In
             let p_fr = fr.parentNode
@@ -93,7 +100,8 @@ export let insert_bot_into_bot_from_right = {
             .into( nt_bot )
             .at("end")
 
-            u.removeThisTree( p_tree )
+            u.removeFr( fr )
+
 
             nt_bot.updateProps()
             p_fr.updateProps()
@@ -104,7 +112,8 @@ export let insert_bot_into_bot_from_right = {
         return { 
             name: this.name,
             updateUI,
-            left 
+            left,
+            bottom: bottom - arrow_to_top
         }
     }
 }
@@ -125,9 +134,13 @@ export let extract_bot_out_of_bot_from_left = {
         }
     },
     makeBorder: function( In: interaction): Border | Border[] {
-        let { p_tree } = In
-        let { left } = document.getElementById( p_tree.full_name )
-                            .getBoundingClientRect()
+        let { p_tree:fr } = In
+        let { arrow_to_border } = In.getProps(["arrow_to_border"])
+        let top = fr["top_1"]
+
+        let { bottom, left } = document
+                .getElementById( top.full_name )
+                .getBoundingClientRect()
 
         let updateUI = function( In: interaction): Tree[]{
             let { dt_list, p_tree: fr } = In
@@ -160,7 +173,8 @@ export let extract_bot_out_of_bot_from_left = {
         return { 
             name: this.name,
             updateUI,
-            left 
+            left,
+            bottom: bottom - arrow_to_border 
         }
     }
 }
@@ -181,9 +195,12 @@ export let extract_bot_out_of_bot_from_right = {
         }
     },
     makeBorder: function( In: interaction): Border | Border[] {
-        let { p_tree } = In
-        let { right } = document.getElementById( p_tree.full_name )
-                            .getBoundingClientRect()
+        let { p_tree:fr } = In
+        let { arrow_to_border } = In.getProps(["arrow_to_border"])
+        let top = fr["top_1"]
+        let { bottom, right } = document
+                .getElementById( top.full_name )
+                .getBoundingClientRect()
 
         let updateUI = function( In: interaction): Tree[]{
             let { dt_list, p_tree: fr } = In
@@ -216,7 +233,8 @@ export let extract_bot_out_of_bot_from_right = {
         return { 
             name: this.name,
             updateUI,
-            right 
+            right,
+            bottom: bottom - arrow_to_border 
         }
     }
 }
