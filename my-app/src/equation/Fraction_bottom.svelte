@@ -222,8 +222,8 @@ div
 	font:30px Times;
 	display:inline-block;
 	cursor:pointer;
-	padding: 0px 0px;
-	margin: 0px 2px;
+	/* padding: 0px 0px;
+	margin: 0px 2px; */
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-khtml-user-select: none;
