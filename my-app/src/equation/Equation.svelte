@@ -9,7 +9,7 @@ import Arrow from './Arrow.svelte'
 import { x_drag } from './actions/x_drag.js'
 import { op } from './actions/xTree.js'
 import { f } from './parsing/parse_formula.js'
-import { In } from './actions/interaction.js'
+
 
 export let formula = false;
 // export let rerender = true;
