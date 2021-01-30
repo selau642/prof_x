@@ -2,14 +2,12 @@
 import { stores } from '@sapper/app';
 const { preloading, page, session } = stores();
 const { host, path, params, query } = $page
-// console.log('host:', host)
-// console.log('path:', path)
-// console.log('params:', params)
-// console.log('query:', query)
 let { cy_test } = query
 
 import { onMount } from 'svelte'
 import Formula from '../equation/Formula.svelte'
+
+import { In } from "../equation/actions/interaction"
 
 // Important!
 // Inject Clone via Client Side Rendering
@@ -21,6 +19,7 @@ import Clone from '../equation/Clone.svelte'
 let client_side_doc = false
 onMount(()=>{
 	client_side_doc = document
+	In.loadSound()
 })
 
 $:if( client_side_doc )
