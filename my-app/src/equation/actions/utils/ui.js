@@ -91,7 +91,9 @@ export let u = {
            }
        } 
    },
-   /** For item type cutting */ 
+   /** For item type cutting 
+    *  i=["sym", "num", "br", "fr"] 
+    * */ 
    cut: function( tree_list )
     {
         this.transfer_fraction_top = false
@@ -141,7 +143,7 @@ export let u = {
                 // update fraction             
                 let { current_fr: cut_fr_tree } = cut_tree.props
                 let p_tree = cut_tree.parentNode
-                if( cut_fr_tree )
+                if( cut_tree_type == 'fr' || cut_fr_tree )
                 {
                     this.bubbleUp( p_tree )
                         .andForEachRun([
@@ -492,11 +494,19 @@ export let u = {
                 if( paste_name == 'top' )
                 {
                     let top_tree = paste_tree
-                    let { one_value, one_tree } = this.checkOne( top_tree )
+                    let { 
+                        no_tree,
+                        one_value, 
+                        one_tree 
+                    } = this.checkOne( top_tree )
                     let cut_show_arrow 
 
-                    if( !one_value )
-                    {
+                    if( no_tree ){
+                        top_tree.props.show_arrow = true 
+                        top_tree.props.selected = true
+                        cut_show_arrow = false
+                    } else if( !no_tree 
+                    && !one_value ){
                         this.e_tree_list = cut_tree_list
                         cut_show_arrow = true
                     }
@@ -539,11 +549,18 @@ export let u = {
                 else if( paste_name == 'bot' )
                 {
                     let bot = paste_tree
+                    let { no_tree } = this.checkOne( bot )
                     this.tree_type = 'item'
                     this.e_tree_list = cut_tree_list
 
-                    // let bot_show_arrow = !bot_tree.props.show_arrow
-
+                    let cut_show_arrow
+                    if( no_tree ){
+                        bot.props.selected = true
+                        bot.props.show_arrow = true
+                        cut_show_arrow = false
+                    } else {
+                        cut_show_arrow = true
+                    }
                     let paste_index = this.parseIndex( index, bot )
                     let start_index = paste_index
                     for( let cut_tree of cut_tree_list )
@@ -554,8 +571,7 @@ export let u = {
                             paste_index: paste_index,
                             new_props: {
                                 arrow_type: "bottom_i",
-                                show_arrow: true
-                                // show_arrow: bot_show_arrow 
+                                show_arrow: cut_show_arrow  
                             }
                         })
         
@@ -572,12 +588,20 @@ export let u = {
                 else if( paste_name == 'bx'  )
                 {
                     let box_tree = paste_tree
-                    let { one_value, one_tree } = this.checkOne( box_tree )
+                    let { 
+                        no_tree, 
+                        one_value, 
+                        one_tree 
+                    } = this.checkOne( box_tree )
+
                     let arrow_type
                     let cut_show_arrow
 
-                    if( !one_value )
-                    {
+                    if( no_tree ){
+                        box_tree.props.show_arrow = true
+                        box_tree.props.selected = true
+                        cut_show_arrow = true
+                    } else if( !no_tree && !one_value ){
                         this.e_tree_list = cut_tree_list
                         arrow_type = 'top_i'
                         cut_show_arrow = true
@@ -1111,6 +1135,7 @@ export let u = {
 		let tree_length = bx.list.length
         let one_value = false
         let one_tree = false
+        let no_tree = false
         let { sign } = bx.props
         //Handle paste into 1
         if( tree_length == 1 )
@@ -1137,8 +1162,11 @@ export let u = {
                     one_tree = i
                 }
             }
-		}
-		return { one_tree: one_tree, one_value: one_value }
+        } else if( tree_length == 0){
+            no_tree = true
+        }
+
+		return { no_tree, one_tree, one_value, no_tree }
     },
     removeOne:function( bx )
 	{
@@ -1500,11 +1528,42 @@ export let u = {
         let bot = op.setTree( fr )
                     .addChild('bot').getLastChild()
                     .tree
-        return { top, bot }
+
+        if( bx.props.selected ){
+            top.props.selected = true
+            bot.props.selected = true
+            fr.props.selected = true
+        }
+
+        return { top, bot, fr }
     },
     removeThisTree: function( tree ){
-        op.removeThisTree( tree )
-        return this
+        
+        let { type } = tree
+        let i = ["sym", "num", "fr", "br"]
+        if( i.find( i_type => i_type == type ) ){
+            let p_tree = tree.parentNode
+            let i_index = p_tree.list.indexOf( tree.name ) 
+            
+            if( type == "fr"){
+                this.removeFr( tree )
+            } else {
+                op.removeThisTree( tree )
+            }
+            
+            if( i_index < p_tree.list.length ){
+                let nt_name = p_tree.list[ i_index ]
+                let nt = p_tree[ nt_name ]
+                if( nt.checkDot ){
+                    nt.checkDot()
+                }
+            }
+            
+        } else {
+            op.removeThisTree( tree )
+        }
+
+       return this
     },
     tick: async function(){
         await tick()
@@ -1517,7 +1576,8 @@ export let u = {
                 .fromEachItem // each bubble p_tree                            
                 ])
 
-        this.removeThisTree( fr )
+        op.removeThisTree( fr )
+        return this
     }
 }
 

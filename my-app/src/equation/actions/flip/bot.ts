@@ -72,7 +72,10 @@ export let flip_bot_down = {
             .at("start") 
 
             // bubbles up
-            u.removeFr( fr ) 
+            u.removeThisTree( fr ) 
+            if( p_top.list.length == 0 ){
+                u.addOne( p_top )
+            }
 
             p_top.updateProps()
             p_bot.updateProps()
@@ -223,7 +226,7 @@ export let flip_top_up ={
                tree.props.selected = selected
             })
 
-            u.removeFr( fr )
+            u.removeThisTree( fr )
 
             p_fr.updateProps()
 

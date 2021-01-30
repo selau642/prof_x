@@ -191,10 +191,10 @@ export let extract_i_from_top_from_left = {
         }
     },
     makeBorder: function( In: interaction): Border {
-        let { p_tree } = In
+        let { p_tree: top } = In
 
         let { left } = 
-                document.getElementById( p_tree.full_name )
+                document.getElementById( top.full_name )
                         .getBoundingClientRect()
         
         // let { eq_sign_border, arrow_to_border } =
@@ -243,10 +243,10 @@ export let extract_i_from_top_from_right = {
         }
     },
     makeBorder: function( In: interaction): Border {
-        let { p_tree } = In
+        let { p_tree: top } = In
 
         let { right } = 
-                document.getElementById( p_tree.full_name )
+                document.getElementById( top.full_name )
                         .getBoundingClientRect()
         
         // let { eq_sign_border, distance_to_dc_top } =

@@ -22,8 +22,8 @@ export let flip_top_i_down  = {
         let { p_tree } = In
         let { 
             dt_border,
-            arrow_to_border
-        } = In.getProps(["dt_border", "arrow_to_border"])
+            arrow_to_top
+        } = In.getProps(["dt_border", "arrow_to_top"])
 
         let fr = p_tree.parentNode
         let { 
@@ -33,7 +33,6 @@ export let flip_top_i_down  = {
                         .getBoundingClientRect()
 
         let { bottom } = dt_border
-        bottom = bottom - arrow_to_border
         
         let updateUI = function( In: interaction): Tree[]{
             let { dt_list, p_tree } = In
@@ -61,7 +60,7 @@ export let flip_top_i_down  = {
         return { 
             name: this.name,
             updateUI,
-            bottom,
+            bottom: bottom - arrow_to_top,
             left,
             right 
         }
@@ -208,7 +207,7 @@ export let flip_bot_up = {
             .into( p_top )
             .at("start")
 
-            u.removeThisTree( fr )
+            u.removeFr( fr )
         
             p_top.updateProps()
             p_bot.updateProps()

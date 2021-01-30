@@ -135,7 +135,7 @@ export let extract_bot_out_of_bot_from_left = {
     },
     makeBorder: function( In: interaction): Border | Border[] {
         let { p_tree:fr } = In
-        let { arrow_to_border } = In.getProps(["arrow_to_border"])
+        let { arrow_to_top } = In.getProps(["arrow_to_top"])
         let top = fr["top_1"]
 
         let { bottom, left } = document
@@ -174,7 +174,7 @@ export let extract_bot_out_of_bot_from_left = {
             name: this.name,
             updateUI,
             left,
-            bottom: bottom - arrow_to_border 
+            bottom: bottom - arrow_to_top 
         }
     }
 }
@@ -196,7 +196,7 @@ export let extract_bot_out_of_bot_from_right = {
     },
     makeBorder: function( In: interaction): Border | Border[] {
         let { p_tree:fr } = In
-        let { arrow_to_border } = In.getProps(["arrow_to_border"])
+        let { arrow_to_top } = In.getProps(["arrow_to_top"])
         let top = fr["top_1"]
         let { bottom, right } = document
                 .getElementById( top.full_name )
@@ -234,7 +234,7 @@ export let extract_bot_out_of_bot_from_right = {
             name: this.name,
             updateUI,
             right,
-            bottom: bottom - arrow_to_border 
+            bottom: bottom - arrow_to_top 
         }
     }
 }
