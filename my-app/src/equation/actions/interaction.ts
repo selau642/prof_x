@@ -100,6 +100,8 @@ export class interaction {
     mp_args: {[key:string]: any } = {}
 
     sound: {[key:string]:any} = {}
+    sound_list: { [key:string]: any } = {}
+
     makeProps = new makeProps() 
     ref_drag_x: number
     ref_drag_y: number
@@ -120,7 +122,6 @@ export class interaction {
     border:border ={}
     border_vars: { bracketRemoved?: boolean } = {}
     props: { [key:string]: any }={}
-    sound_list: { [key:string]: any } = {}
     context_list=[]
     /**Add actions to tree_action_list
     * @param {Object} inter_tree interaction_tree containing all interactions(e.g. swap) of a tree type(e.g. item).
@@ -141,6 +142,14 @@ export class interaction {
     addSound( input ){
         let{ name, file } = input
         this.sound_list[ name ] = file 
+    }
+
+    loadSound( input ){
+        let { sound_list } = this
+        for( let sound_name in sound_list ){
+            let file = this.sound_list[ sound_name ]
+            this.sound[ sound_name ] = new Audio( file )
+        }
     }
 
     playSound( name: string ){
@@ -589,7 +598,8 @@ export class interaction {
         let { e_tree_list, e_tree_list: { 0: e_tree } } = input
 
         let p_tree = e_tree.parentNode
-        if( p_tree && p_tree.props.selected )
+        if( p_tree 
+        && p_tree.props.selected )
         {
             for( let tree of e_tree_list )
             {
