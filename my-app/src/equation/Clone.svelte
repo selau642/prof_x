@@ -229,8 +229,11 @@ async function handleDragEnd(event)
 		let drag_elem
 		if( original_tree )
 		{
-			// start from item-in_bracket, 
-			// and release item-in_bracket
+			// {a} = original_tree
+			// [a]b + [{a}]c  dragging {a}	
+			// did not trigger
+			// so fall back to {a} 
+			
 			drag_elem = document.getElementById( original_tree.full_name + '-border' )
 					// .getElementsByClassName('border_wrap')
 			e_tree_list = [ original_tree ]
@@ -411,7 +414,7 @@ div
 	position:absolute;
 	text-align:center;
 	vertical-align: top;
-	
+	opacity:0.7;
 	z-index: 100;	
 }
 

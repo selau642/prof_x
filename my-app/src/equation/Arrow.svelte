@@ -73,6 +73,7 @@ function arrow_mouse_down(e)
 {  
 	position: absolute;
 	cursor:pointer;
+	opacity: 0.8;
 }
 
 .flip-top 

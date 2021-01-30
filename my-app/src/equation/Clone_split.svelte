@@ -102,6 +102,7 @@ div
 {
 	position:absolute;
 	background-color: rgb(255, 255, 255);
+	opacity: 0.7;
 	z-index: 100;	
 }
 
