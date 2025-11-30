@@ -1,7 +1,7 @@
 # PROF X
 Professor X lets you manipulate math variables in equations to do algebra transformations.
 Its build with Svelte and Typescript.
-
+[til](https://raw.githubusercontent.com/selau642/prof_x/master/my-app/static/EquationManipulation.gif)
 # INSTALL 
 ```bash
 cd my-app
