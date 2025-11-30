@@ -1,50 +1,35 @@
 <script>
-	import successkid from 'images/successkid.jpg';
+import { stores } from '@sapper/app';
+const { preloading, page, session } = stores();
+const { host, path, params, query } = $page
+let { cy_test } = query
+
+import { onMount } from 'svelte'
+import Formula from '../equation/Formula.svelte'
+
+import { In } from "../equation/actions/interaction"
+
+// Important!
+// Inject Clone via Client Side Rendering
+// into document.body so that the clone element
+// appears directly overlapping the clicked element
+
+import Clone from '../equation/Clone.svelte'
+
+let client_side_doc = false
+onMount(()=>{
+	client_side_doc = document
+	In.loadSound()
+})
+
+$:if( client_side_doc )
+{
+	let insert_clone = new Clone({
+		target: client_side_doc.body
+	})
+}
 </script>
-
-<style>
-	h1, figure, p {
-		text-align: center;
-		/* margin: 0 auto; */
-	}
-
-	h1 {
-		font-size: 2.8em;
-		text-transform: uppercase;
-		font-weight: 700;
-		margin: 0 0 0.5em 0;
-	}
-
-	figure {
-		margin: 0 0 1em 0;
-	}
-
-	img {
-		width: 100%;
-		max-width: 400px;
-		margin: 0 0 1em 0;
-	}
-
-	p {
-		margin: 1em auto;
-	}
-
-	@media (min-width: 480px) {
-		h1 {
-			font-size: 4em;
-		}
-	}
-</style>
-
 <svelte:head>
-	<title>Sapper project template</title>
+	<title>Σ Editor | Professor 𝛘</title>
 </svelte:head>
-
-<h1>Great success!</h1>
-
-<figure>
-	<img alt="Success Kid" src="{successkid}">
-	<figcaption>Have fun with Sapper!</figcaption>
-</figure>
-
-<p><strong>Try editing this file (src/routes/index.svelte) to test live reloading.</strong></p>
+<Formula cy_test={cy_test}/>
