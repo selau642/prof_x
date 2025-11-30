@@ -138,8 +138,8 @@ export let bx = {
             let { nt, pt, plus_width,
              eq_origin, dt_border } = In.getProps(['nt', 'pt', 
              'eq_origin', 'plus_width','dt_border'])
-
-            let dt_list = In.dt_list[0] as Tree[]
+            // Hot Fix to test against fractions
+            let dt_list = In.dt_list as Tree[]
             let dt = dt_list[0]
 
             let right: number 
