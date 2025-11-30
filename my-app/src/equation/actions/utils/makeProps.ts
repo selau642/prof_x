@@ -1,5 +1,5 @@
 import type { interaction } from "../interaction";
-import type { Tree } from '../types/main'
+import type { Tree, Tree_List } from '../types/main'
 
 import { op } from "../xTree"
 
@@ -16,8 +16,8 @@ export class makeProps{
     /** previous tree */
     pt( In: interaction ){
         // used by bx & item
-        let { dt_list, p_tree } = In
-        
+        let { p_tree } = In
+        let dt_list = In.dt_list as Tree[]
         let first_dt = dt_list[0]
         let index = p_tree.list.indexOf( first_dt.name )
         let pt_index = index - 1 
@@ -35,8 +35,8 @@ export class makeProps{
     /** next tree */
     nt( In: interaction ){
          // used by bx & item
-        let { dt_list, p_tree } = In
-
+        let { p_tree } = In
+        let dt_list = In.dt_list as Tree[]
         let last_dt = dt_list[ dt_list.length - 1]
         let index = p_tree.list.indexOf( last_dt.name )
         let nt_index = index + 1
@@ -200,7 +200,7 @@ export class makeProps{
      */
     im_br_border( In: interaction ) 
     {
-        let { dt_list } = In
+        let dt_list  = In.dt_list as Tree_List[]
         // [a_1*b_1]c + [a_2*b_2]d + [a_3*b_3]e
 
         // dt_list =
@@ -302,9 +302,12 @@ export class makeProps{
         let min_tree: Tree
         let max_tree: Tree
         if( !Array.isArray( dt_list[0]) ){
-            min_tree = dt_list[0]
+            let dt_list = In.dt_list as Tree[]
+            min_tree = dt_list[0] 
             max_tree = dt_list[ dt_list.length - 1 ]
         } else {
+
+            let dt_list = In.dt_list as Tree_List[]
             min_tree = dt_list[0][0]
             max_tree = dt_list[ dt_list.length - 1][0]
         }
@@ -349,7 +352,8 @@ export class makeProps{
         }
 
         if( dt.type == 'zero' ){
-            dt = dt.props.eq
+            // HOT FIX
+            dt = dt.props.eq as Tree 
         }
 
         let f = op.setTree( dt )

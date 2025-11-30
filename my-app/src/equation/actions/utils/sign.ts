@@ -1,3 +1,4 @@
+import type { Tree } from "../types/main"
 
 export let match_sign = function( clone: any, dt: Tree ){
     clone.update( obj => {
