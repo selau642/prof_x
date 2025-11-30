@@ -1,8 +1,8 @@
 # PROF X
-Professor X is a simple equation app that allows the user to drag and drop variables to manipulate equations.
+Professor X lets you manipulate math variables in equations to do algebra transformations.
 Its build with Svelte and Typescript.
 
-# INSTALL
+# INSTALL 
 ```bash
 cd my-app
 npm install # or yarn
