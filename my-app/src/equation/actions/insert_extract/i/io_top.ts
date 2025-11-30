@@ -77,7 +77,7 @@ export let insert_i_into_top_from_left = {
             top.updateProps()
             p_tree.updateProps()
 
-            return dt_list
+            return dt_list as Tree[]
         }
 
         return { 
@@ -161,7 +161,7 @@ export let insert_i_into_top_from_right = {
             top.updateProps()
             p_tree.updateProps()
 
-            return dt_list
+            return dt_list as Tree[]
         }
 
         return { 
@@ -217,7 +217,7 @@ export let extract_i_from_top_from_left = {
             .at( index )
             bx.updateProps()
             fr.checkDot()
-            return dt_list
+            return dt_list as Tree[]
         }
 
         return { 
@@ -273,7 +273,7 @@ export let extract_i_from_top_from_right = {
             bx.updateProps()
             fr.checkDot()
 
-            return dt_list
+            return dt_list as Tree[]
         }
 
         return { 

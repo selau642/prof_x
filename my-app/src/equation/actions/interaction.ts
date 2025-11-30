@@ -1,13 +1,13 @@
 // @ts-nocheck
 import { u } from "./utils/ui.js"
-import { swap } from "./swap/main"
-import { cross_eq } from './cross_eq/main'
-import { insert, extract } from './insert_extract/main'
-import { flip } from './flip/main'
+import { swap } from "./swap/main.js"
+import { cross_eq } from './cross_eq/main.js'
+import { insert, extract } from './insert_extract/main.js'
+import { flip } from './flip/main.js'
 
 import { tick } from 'svelte'
-// import type { border } from './types/type'
-import { makeProps } from './utils/makeProps'
+import type { Tree, Tree_List, Border } from './types/main.js'
+import { makeProps } from './utils/makeProps.js'
 //interaction operator
 
 // One Time Setup
@@ -91,7 +91,6 @@ function set_interaction()
 
 }
 
-type Tree_List = Tree[] // for in-br
 export class interaction {
     first_drag: boolean = false
     dt: Tree // drag_tree
@@ -113,7 +112,7 @@ export class interaction {
     clone: { split_clone_list: any[] | false }={} 
     // for Clone.svelte to split into multiple Clone.svelte
     // used by insert_extract/in_br.ts 
-    original_tree: Tree
+    original_tree: Tree | false
     isUpdatingTree: boolean=false
     /**tree_type to action[] dict */
     dt_action: { [key:string]: action[]} = {}

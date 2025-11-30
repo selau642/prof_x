@@ -10,20 +10,19 @@ export let i = {
         name: "cross_eq.i.sink_left_to_right",
         tree_type_list: ["sym", "num", "br", "fr"],
         isInContext: function(In: interaction): boolean {
-            let { eq_origin } = 
-            In.getProps(['eq_origin'])
+            let { eq_origin } = In.getProps(['eq_origin'])
             let { dt_list: [ dt ], p_tree } = In
             
             let eq_tree
-            //if( p_tree.type == 'bx' ){
-                //eq_1-bx_1-sym_1
-                //  2  - 1 
+            if( p_tree.type == 'bx' ){
+                // eq_1-bx_1-sym_1
+                // 2  - 1 
                 eq_tree = op.setTree( dt ).getParent(2).tree
-            //} else if( p_tree.type == 'top'){
-                //eq_1-bx_1-fr_1-top_1-sym_1
-                //  4  - 3  - 2  - 1 
-            //    eq_tree = op.setTree( dt ).getParent(4).tree
-            //}
+            } else if( p_tree.type == 'top'){
+                // eq_1-bx_1-fr_1-top_1-sym_1
+                // 4  - 3  - 2  - 1 
+                eq_tree = op.setTree( dt ).getParent(4).tree
+            }
 
             if( eq_origin == 'left_eq'
             && ( p_tree.type == 'bx' ) 

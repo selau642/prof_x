@@ -1,5 +1,5 @@
 import type { interaction } from '../interaction'
-import type { Tree, Border } from '../types/main'
+import type { Tree, Tree_List, Border } from '../types/main'
 import { u } from "../utils/ui.js"
 import { clone } from '../clone_stores.js'
 import { 
@@ -15,7 +15,9 @@ export let bx = {
         name: "cross_eq.bx.above_left_to_right",
         tree_type_list: ['bx'],
         isInContext: function(In: interaction): boolean {
-            let { dt_list:[ dt ], p_tree } = In
+            let { p_tree } = In
+            let dt_list = In.dt_list as Tree[]
+            let dt = dt_list[0]
             let { eq_origin } = In.getProps(['eq_origin'])
             let dt_index = p_tree.list.indexOf( dt.name ) 
 
@@ -54,8 +56,8 @@ export let bx = {
                 let { left_eq_tree, right_eq_tree } = 
                     In.getProps(['left_eq_tree', 'right_eq_tree']) 
 
-                let { dt_list: [ dt ] } = In
-
+                let dt_list = In.dt_list as Tree[]
+                let dt = dt_list[0]
                 flip_sign( dt )
 
                 u.cutBox( dt )
@@ -86,7 +88,9 @@ export let bx = {
         name: "cross_eq.bx.above_right_to_left",
         tree_type_list: ['bx'],
         isInContext: function(In: interaction): boolean {
-            let { dt_list:[ dt ], p_tree } = In
+            let { p_tree } = In
+            let dt_list = In.dt_list as Tree[]
+            let dt = dt_list[0]
             let { eq_origin } = In.getProps(['eq_origin'])
             let dt_index = p_tree.list.indexOf( dt.name ) 
 
@@ -108,7 +112,8 @@ export let bx = {
                 let { left_eq_tree, right_eq_tree } = 
                     In.getProps(['left_eq_tree', 'right_eq_tree']) 
 
-                let { dt_list: [ dt ] } = In
+                let dt_list = In.dt_list as Tree[]
+                let dt = dt_list[0]
 
                 flip_sign( dt )
 

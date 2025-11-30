@@ -7,7 +7,8 @@ export let zero = {
         name: "cross_eq.zero.float_left_to_right",
         tree_type_list: ["zero"],
         isInContext: function(In: interaction): boolean {
-            let { dt_list: [ dt ] } = In
+            let dt_list = In.dt_list as Tree[]
+            let dt  = dt_list[0]
             let { from, eq } = dt.props
             if( from == "sink"  
             && eq.name == 'eq_1'
@@ -41,7 +42,8 @@ export let zero = {
         name: "cross_eq.zero.float_right_to_left",
         tree_type_list: ["zero"],
         isInContext: function(In: interaction): boolean {
-            let { dt_list: [ dt ] } = In
+            let dt_list = In.dt_list as Tree[]
+            let dt  = dt_list[0]
             let { from, eq } = dt.props
             if( from == 'sink' 
             && eq.name == 'eq_2' 
@@ -74,7 +76,9 @@ export let zero = {
         name: "cross_eq.zero.sink_left_to_right",
         tree_type_list: ["zero"],
         isInContext: function(In: interaction): boolean {
-            let { dt_list:[ dt ] } = In
+            let dt_list = In.dt_list as Tree[]
+            let dt  = dt_list[0]
+
             let { from, eq } = dt.props
             
             if( from == 'float' 
@@ -109,7 +113,9 @@ export let zero = {
         name: "cross_eq.zero.sink_right_to_left",
         tree_type_list: ["zero"],
         isInContext: function(In: interaction): boolean {
-            let { dt_list:[ dt ] } = In
+            let dt_list = In.dt_list as Tree[]
+            let dt  = dt_list[0]
+
             let { from, eq } = dt.props
             
             if( from == "float" 
@@ -144,10 +150,9 @@ export let zero = {
 }
 
 function float_sy( In:interaction ):Tree[]{
-    let { dt_list,
-         dt_list:[ dt ], 
-         p_tree: start_tree } = In
-
+    // let { p_tree: start_tree } = In
+    let dt_list = In.dt_list as Tree[]
+    let dt = dt_list[0] 
     let { eq: dt_eq } = dt.props
 
     let eq_origin
@@ -242,10 +247,9 @@ function float_sy( In:interaction ):Tree[]{
 }
 
 function sink_sy( In:interaction ):Tree[]{
-    let { dt_list, 
-     dt_list:[ dt ], 
-     p_tree: start_tree } = In 
-    
+    let dt_list = In.dt_list as Tree[] 
+    let dt = dt_list[0]
+
     let eq
     let { eq: dt_eq } = dt.props
     

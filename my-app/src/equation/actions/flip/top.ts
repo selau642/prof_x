@@ -37,7 +37,7 @@ export let flip_top_i_down  = {
         let updateUI = function( In: interaction): Tree[]{
             let { dt_list, p_tree } = In
             let fr = p_tree.parentNode
-            let fr_bot = fr['bot_1']
+            let fr_bot = fr['bot_1'] as Tree
 
             let {
                 top: new_top,
@@ -93,7 +93,7 @@ export let flip_top_down  = {
             let { dt_list, p_tree: fr } = In            
             
             let fr_top = dt_list[0]
-            let fr_bot = fr['bot_1']
+            let fr_bot = fr['bot_1'] as Tree
 
             let {
                 top: new_top,
@@ -154,7 +154,7 @@ export let flip_bot_up = {
         let { arrow_to_border } = In.getProps(["arrow_to_border"])
         let p_bot = fr.parentNode
         let p_fr = p_bot.parentNode
-        let p_top = p_fr['top_1']
+        let p_top = p_fr['top_1'] as Tree
         let { bottom } = document.getElementById( p_top.full_name )
                     .getBoundingClientRect()
 
@@ -165,18 +165,18 @@ export let flip_bot_up = {
             */
             let { dt_list:[dt], p_tree:fr } = In
             let bot = dt 
-            let top = fr['top_1']
-            let top_i = top[ top.list[0] ]
+            let top = fr['top_1'] as Tree
+            let top_i = top[ top.list[0] ] as Tree
             let p_bot = fr.parentNode
             let p_fr = p_bot.parentNode
-            let p_top = p_fr['top_1']
+            let p_top = p_fr['top_1'] as Tree
 
             if( !(top.list.length == 1 
             && top_i.props.text == '1') )
             {
                 // need transfer out item tree in top
                 let top_child_list = top.list.map( tree_name =>
-                            top[tree_name] )
+                            top[tree_name] ) as Tree[]
                 let fr_index = p_bot.list.indexOf( fr.name )                
 
                 let top_arrow_list = top_child_list.map( tree =>{ 
@@ -249,7 +249,7 @@ export let flip_bot_i_up = {
         let fr = bot.parentNode
         let p_bot = fr.parentNode
         let p_fr = p_bot.parentNode
-        let p_top = p_fr["top_1"]
+        let p_top = p_fr["top_1"] as Tree
         let { bottom, left, right } = document.getElementById( p_top.full_name )
                         .getBoundingClientRect()
 
@@ -260,7 +260,7 @@ export let flip_bot_i_up = {
             let fr = bot.parentNode
             let p_bot = fr.parentNode
             let p_fr = p_bot.parentNode
-            let p_top = p_fr["top_1"]
+            let p_top = p_fr["top_1"] as Tree
 
             u.cut( dt_list )
             .paste()
@@ -270,7 +270,7 @@ export let flip_bot_i_up = {
             bot.updateProps()
             p_top.updateProps()
 
-            return dt_list
+            return dt_list as Tree[]
         }
 
         return { 

@@ -13,11 +13,12 @@ export let insert_bot_into_i_from_left = {
     tree_type_list: ["bot"],
     isInContext: function(In: interaction): boolean {
         let { p_tree: fr } = In
-        let top = fr["top_1"]
-        let top_i = top[ top.list[0] ]
+        let top = fr["top_1"] as Tree
+        let top_i = top[ top.list[0] ] as Tree
 
         let { fr_nt } = In.getProps(["fr_nt"])
         let i_list = ["sym", "num", "br"]
+
         if( i_list.indexOf( fr_nt.type ) > -1
         && top.list.length == 1
         && top_i.props.text == '1' ){
@@ -36,7 +37,7 @@ export let insert_bot_into_i_from_left = {
             let { dt_list, p_tree: fr } = In
 
             let p_fr = fr.parentNode
-            let top = fr["top_1"] 
+            let top = fr["top_1"] as Tree
 
             // let { show_arrow, selected } = fr_nt.props
 
@@ -54,7 +55,7 @@ export let insert_bot_into_i_from_left = {
             top.updateProps()
             p_fr.updateProps() 
 
-            return dt_list
+            return dt_list as Tree[]
         }
 
         return { 
@@ -75,8 +76,8 @@ export let insert_bot_into_i_from_right = {
     tree_type_list: ["bot"],
     isInContext: function(In: interaction): boolean {
         let { p_tree: fr } = In
-        let top = fr["top_1"]
-        let top_i = top[ top.list[0]]
+        let top = fr["top_1"] as Tree
+        let top_i = top[ top.list[0]] as Tree
 
         let { fr_pt } = In.getProps(["fr_pt"])
         let i_list = ["sym", "num", "br"]
@@ -98,7 +99,7 @@ export let insert_bot_into_i_from_right = {
             let { dt_list, p_tree: fr } = In
 
             let p_fr = fr.parentNode
-            let top = fr["top_1"] 
+            let top = fr["top_1"] as Tree
 
             // let { show_arrow, selected } = fr_pt.props
 
@@ -116,7 +117,7 @@ export let insert_bot_into_i_from_right = {
             top.updateProps()
             p_fr.updateProps() 
 
-            return dt_list
+            return dt_list as Tree[]
         }
 
         return { 

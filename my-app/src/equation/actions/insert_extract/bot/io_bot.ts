@@ -13,8 +13,8 @@ export let insert_bot_into_bot_from_left = {
         let { p_tree:fr } = In
         let { fr_nt } = In.getProps(["fr_nt"])
         
-        let top = fr["top_1"]
-        let top_i = top[ top.list[0] ]
+        let top = fr["top_1"] as Tree
+        let top_i = top[ top.list[0] ] as Tree
 
         if( fr_nt.type == "fr"
         && top.list.length == 1 
@@ -27,7 +27,7 @@ export let insert_bot_into_bot_from_left = {
     makeBorder: function( In: interaction): Border | Border[] {
         let { p_tree: fr } = In
         let { arrow_to_top } = In.getProps(["arrow_to_top"])
-        let top = fr["top_1"]
+        let top = fr["top_1"] as Tree
 
         let { bottom, right } = document
                     .getElementById( top.full_name )
@@ -68,8 +68,8 @@ export let insert_bot_into_bot_from_right = {
         let { fr_pt } = In.getProps(["fr_pt"])
         let { p_tree: fr } = In
 
-        let top = fr["top_1"]
-        let top_i = top[ top.list[0] ]
+        let top = fr["top_1"] as Tree
+        let top_i = top[ top.list[0] ] as Tree
 
         if( fr_pt.type == "fr"
         && top.list.length == 1
@@ -82,7 +82,7 @@ export let insert_bot_into_bot_from_right = {
     makeBorder: function( In: interaction): Border | Border[] {
         let { p_tree: fr } = In
         let { arrow_to_top } = In.getProps(["arrow_to_top"])
-        let top = fr["top_1"]
+        let top = fr["top_1"] as Tree
         let { bottom, left } = document.getElementById( top.full_name )
                     .getBoundingClientRect()
 
@@ -123,8 +123,8 @@ export let extract_bot_out_of_bot_from_left = {
     tree_type_list: ["bot"],
     isInContext: function(In: interaction): boolean {
         let { p_tree:fr } = In
-        let top = fr['top_1']
-        let top_i = top[ top.list[0] ]
+        let top = fr['top_1'] as Tree
+        let top_i = top[ top.list[0] ] as Tree
         // not 1/[b]
         if( !(top.list.length == 1
         && top_i.props.text == "1" ) ){
@@ -136,7 +136,7 @@ export let extract_bot_out_of_bot_from_left = {
     makeBorder: function( In: interaction): Border | Border[] {
         let { p_tree:fr } = In
         let { arrow_to_top } = In.getProps(["arrow_to_top"])
-        let top = fr["top_1"]
+        let top = fr["top_1"] as Tree
 
         let { bottom, left } = document
                 .getElementById( top.full_name )
@@ -144,13 +144,13 @@ export let extract_bot_out_of_bot_from_left = {
 
         let updateUI = function( In: interaction): Tree[]{
             let { dt_list, p_tree: fr } = In
-            let top = fr['top_1']
+            let top = fr['top_1'] as Tree
             let p_fr = fr.parentNode
             let fr_index = p_fr.list.indexOf( fr.name )
             /** 
              * a/[b] =>  1/[b]  * a(top)
             */
-            let ct_list = top.list.map( ct_name => top[ct_name] )
+            let ct_list = top.list.map( ct_name => top[ct_name] ) as Tree[]
 
             u.cutAllChildOf( [top] )
             .paste()
@@ -167,7 +167,7 @@ export let extract_bot_out_of_bot_from_left = {
             top.updateProps()
             p_fr.updateProps()
 
-            return dt_list 
+            return dt_list as Tree[]
         }
 
         return { 
@@ -184,8 +184,8 @@ export let extract_bot_out_of_bot_from_right = {
     tree_type_list: ["bot"],
     isInContext: function(In: interaction): boolean {
         let { p_tree:fr } = In
-        let top = fr['top_1']
-        let top_i = top[ top.list[0] ]
+        let top = fr['top_1'] as Tree
+        let top_i = top[ top.list[0] ] as Tree
         // not 1/[b]
         if( !( top.list.length == 1
         && top_i.props.text == "1") ){
@@ -197,21 +197,21 @@ export let extract_bot_out_of_bot_from_right = {
     makeBorder: function( In: interaction): Border | Border[] {
         let { p_tree:fr } = In
         let { arrow_to_top } = In.getProps(["arrow_to_top"])
-        let top = fr["top_1"]
+        let top = fr["top_1"] as Tree
         let { bottom, right } = document
                 .getElementById( top.full_name )
                 .getBoundingClientRect()
 
         let updateUI = function( In: interaction): Tree[]{
             let { dt_list, p_tree: fr } = In
-            let top = fr['top_1']
+            let top = fr['top_1'] as Tree
             let p_fr = fr.parentNode
             let fr_index = p_fr.list.indexOf( fr.name )
             /** 
              * a/[b] => a(top) *  1/[b]
             */
 
-            let ct_list = top.list.map( ct_name => top[ct_name] )
+            let ct_list = top.list.map( ct_name => top[ct_name] ) as Tree[]
 
             u.cutAllChildOf( [top] )
             .paste()
@@ -227,7 +227,7 @@ export let extract_bot_out_of_bot_from_right = {
             top.updateProps()
             p_fr.updateProps()
 
-            return dt_list
+            return dt_list as Tree[]
         }
 
         return { 

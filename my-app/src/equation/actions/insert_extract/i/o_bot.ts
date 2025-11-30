@@ -1,5 +1,5 @@
 import type { interaction } from "../../interaction";
-import type { Tree, Border } from '../../types/main'
+import type { Tree, Tree_List, Border } from '../../types/main'
 import { u } from "../../utils/ui.js"
 /**
  *  1/[a]b => 1/[a]* 1/b
@@ -8,7 +8,9 @@ export let extract_i_out_of_bot_from_left = {
     name: "extract.i.out_of_bot.from_left",
     tree_type_list: ["sym","num", "br"],
     isInContext: function(In: interaction): boolean {
-        let { dt_list:[dt], p_tree:bot } = In
+        let { p_tree:bot } = In
+        let dt_list = In.dt_list as Tree[]
+        let dt = dt_list[0]
         let dt_index = bot.list.indexOf( dt.name )
 
         if( bot.type == "bot" 
@@ -26,7 +28,8 @@ export let extract_i_out_of_bot_from_left = {
                             .getBoundingClientRect()
 
         let updateUI = function( In: interaction): Tree[]{
-            let { dt_list, p_tree: bot } = In
+            let { p_tree: bot } = In
+            let dt_list = In.dt_list as Tree[]
             let fr = bot.parentNode
             let p_fr = fr.parentNode
             let fr_index = p_fr.list.indexOf( fr.name )
@@ -68,7 +71,9 @@ export let extract_i_out_of_bot_from_right = {
     name: "extract.i.out_of_bot.from_right",
     tree_type_list: ["sym","num", "br"],
     isInContext: function(In: interaction): boolean {
-        let { dt_list:[dt], p_tree: bot } = In
+        let { p_tree: bot } = In
+        let dt_list = In.dt_list as Tree[]
+        let dt = dt_list[0]
         let dt_index = bot.list.indexOf( dt.name ) 
         if( bot.type == "bot" 
         && bot.list.length > 1 
@@ -85,7 +90,8 @@ export let extract_i_out_of_bot_from_right = {
                             .getBoundingClientRect()
 
         let updateUI = function( In: interaction): Tree[]{
-            let { dt_list, p_tree:bot } = In
+            let { p_tree:bot } = In
+            let dt_list = In.dt_list as Tree[]
             let fr = bot.parentNode
             let p_fr = fr.parentNode
             let fr_index = p_fr.list.indexOf( fr.name )

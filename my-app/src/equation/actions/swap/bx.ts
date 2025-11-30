@@ -43,7 +43,7 @@ export let bx = {
                     left = de_right - ( pe_width + de_width / 2 )  
                 } else {
                     let { dt_list } = In
-                    let dt = dt_list[0]
+                    let dt = dt_list[0] as Tree
                     let { sign: pt_sign } = pt.props
                     let { sign: dt_sign } = dt.props
 

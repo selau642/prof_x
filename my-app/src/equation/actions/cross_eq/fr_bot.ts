@@ -1,5 +1,5 @@
 import type { interaction } from '../interaction'
-import type { Tree, Border } from '../types/main'
+import type { Tree, Tree_List, Border } from '../types/main'
 import { u } from "../utils/ui.js"
 
 export let bot = {

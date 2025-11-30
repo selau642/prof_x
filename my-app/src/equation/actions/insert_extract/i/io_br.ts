@@ -1,5 +1,5 @@
 import type { interaction } from '../../interaction'
-import type { Tree, Border } from '../../types/main'
+import type { Tree, Tree_List, Border } from '../../types/main'
 import { u } from "../../utils/ui.js"
 import { clone } from '../../clone_stores.js'
 
@@ -62,13 +62,13 @@ export let insert_i_into_br_from_left={
             // ==>> enter
             // console.log( e_tree_list )
             u.cut( dt_list )
-            let br = p_tree[ p_tree.list[ u.getCutIndex() ] ]
+            let br = p_tree[ p_tree.list[ u.getCutIndex() ] ] as Tree
             
             u.paste()
             .intoBracket( br )
             .at('start')
             
-            let bx = br.parentNode
+            let bx = br.parentNode 
             if( bx.list.length == 1 
             && bx.type == 'bx'
             && !br.props.sign )
@@ -78,7 +78,7 @@ export let insert_i_into_br_from_left={
                     // a + [c](b + d) 
                     // a {+}[c]b +[c]d  
                     // create the {+}
-                    let bx = br[ br.list[0] ]
+                    let bx = br[ br.list[0] ] as Tree
                     bx.props.sign = '+'
                     u.removeBracket( br )
                     In.border_vars.bracketRemoved = true
@@ -176,7 +176,7 @@ export let insert_i_into_br_from_right={
             // because after cut it becomes
             // = a+b 
 
-            let br = p_tree[ p_tree.list[ u.getCutIndex() - 1 ] ]
+            let br = p_tree[ p_tree.list[ u.getCutIndex() - 1 ] ] as Tree
 
             u.paste()
             .intoBracket( br )
@@ -192,7 +192,7 @@ export let insert_i_into_br_from_right={
                     // a + [c](b + d) 
                     // a {+}[c]b +[c]d  
                     // create the {+}
-                    let bx = br[ br.list[0] ]
+                    let bx = br[ br.list[0] ] as Tree
                     bx.props.sign = '+'
                     u.removeBracket( br )
                     // In.border_vars.bracketRemoved = true
@@ -283,7 +283,7 @@ export let extract_i_from_br_from_left={
     },
     makeBorder: function( In: interaction): Border {
 
-        let { dt_list, first_drag } = In
+        let { dt_list , first_drag } = In
         let { eq_origin,
             dt_border,
             dt_br_border,
@@ -301,7 +301,7 @@ export let extract_i_from_br_from_left={
 
         let { width: de_width } = dt_border
 
-        let bx_count = dt_list[0].length
+        let bx_count = (dt_list[0] as Tree[]).length
         let left 
         if( first_drag ){
             left = br_left
@@ -318,8 +318,9 @@ export let extract_i_from_br_from_left={
             In.original_tree = false
 
             // exit bracket <<---
-            let { dt_list, 
-                dt_list:[[ dt ]] } = In 
+            let dt_list  = In.dt_list as Tree_List[]
+
+            let dt = dt_list[0][0]
 
             let p_tree_list = dt_list[0].map((tree)=>{
                     return tree.parentNode
@@ -493,7 +494,8 @@ export let extract_i_from_br_from_right={
         }
     },
     makeBorder: function( In: interaction): Border {
-        let { dt_list, first_drag } = In
+        let { first_drag } = In
+        let dt_list = In.dt_list as Tree_List[]
         let { eq_origin,
             dt_border,
             dt_br_border,
@@ -527,9 +529,8 @@ export let extract_i_from_br_from_right={
             In.original_tree = false
 
             // exit bracket --->>
-            let { dt_list, 
-                dt_list:[[ dt ]] } = In 
-
+            let dt_list = In.dt_list as Tree_List[]
+            let dt = dt_list[0][0]
             let p_tree_list = dt_list[0].map((tree)=>{
                     return tree.parentNode
                 })

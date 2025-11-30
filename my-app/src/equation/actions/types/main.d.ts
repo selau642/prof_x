@@ -6,9 +6,11 @@ export interface Tree{
     list: Array<string>
     parentNode: Tree
     props: Tree_Props
+    full_name: string
     [tree_name:string]: string | Array<string> | Tree | Function | Tree_Props 
     checkDot?(): void
     updateProps?(): void
+    renderFraction?(): void // Fraction
 }
 
 interface Tree_Props{
@@ -19,6 +21,12 @@ interface Tree_Props{
     sign?: "+" | "-" | false | undefined 
     sub_formula?: string          // +abc
     contain_fraction: boolean     // has fraction in child tree?
+    text?: string
+    from?: string
+    eq?: Eq
+}
+interface Eq {
+    name: string // eq_1, eq_2
 }
 
 type Grid_Direction = 'top_left' 
@@ -37,7 +45,7 @@ export interface Border{
     right?: number
     left?: number
     direction?: Grid_Direction
-    updateUI( In: interaction ): Tree[] 
+    updateUI( In: interaction ): Tree[] | Promise<Tree[]>
     // afterRenderUI?( In: interaction ): void
     svelte_tick?( In: interaction ): void
     // [key: grid_direction ]: Array<any>
@@ -60,3 +68,6 @@ interface Action{
     isInContext(In: interaction): boolean
     makeBorder(In: interaction): Border 
 }
+
+
+type Tree_List = Tree[] // for in-br
