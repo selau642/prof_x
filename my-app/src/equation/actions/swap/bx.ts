@@ -83,7 +83,7 @@ export let bx = {
                     left = pe_left + de_width / 2
                 } else {
                     // pt_index === 0
-                    let { dt_list } = In
+                    let dt_list = In.dt_list as Tree[]
                     let dt = dt_list[0]
                     if( dt.props.sign == '+'){
                         // [-bcd][+a] => [ref_point][a][-bcd]
@@ -99,8 +99,9 @@ export let bx = {
 
             let updateUI = function( In: interaction ): Tree[]{
                 // console.log('swap.bx.left')
-                let { dt_list, p_tree, dt_list:[ dt ] } = In
-
+                let { p_tree } = In
+                let dt_list = In.dt_list as Tree[]
+                let dt = dt_list[0]
                 u.move( dt_list ) 
                 .left()
 
@@ -138,7 +139,8 @@ export let bx = {
              eq_origin, dt_border } = In.getProps(['nt', 'pt', 
              'eq_origin', 'plus_width','dt_border'])
 
-            let { dt_list: [ dt ] } = In 
+            let dt_list = In.dt_list[0] as Tree[]
+            let dt = dt_list[0]
 
             let right: number 
             let { 
@@ -182,7 +184,7 @@ export let bx = {
                     // [-a][-bcd] => [ref_point][-bcd][-a]
                     right = de_left + ne_width + de_width / 2
                 } else {
-                    let { dt_list } = In
+                    let dt_list = In.dt_list as Tree[]
                     let dt = dt_list[0]
                     let { sign: dt_sign } = dt.props
                     let { sign: nt_sign } = nt.props
@@ -209,7 +211,8 @@ export let bx = {
 
             let updateUI = function( In: interaction ): Tree[]{
                 // console.log('swap.bx.right')
-                let { dt_list, p_tree  } = In
+                let { p_tree  } = In
+                let dt_list = In.dt_list as Tree[]
 
                 u.move( dt_list )
                 .right()

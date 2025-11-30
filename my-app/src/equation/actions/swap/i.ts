@@ -50,8 +50,8 @@ export let i = {
             
             let updateUI = function( In: interaction):Tree[]{                            
                 // console.log("swap.i.left")
-                let { dt_list, p_tree } = In
-
+                let { p_tree } = In
+                let dt_list = In.dt_list as Tree[]
                 u.move( dt_list )
                 .left()
 
@@ -114,8 +114,8 @@ export let i = {
 
             let updateUI = function( In: interaction): Tree[]{                            
                 // console.log('swap.i.right')
-                let { dt_list, p_tree  } = In
-
+                let { p_tree  } = In
+                let dt_list = In.dt_list as Tree[]
                 u.move( dt_list )
                 .right()
 
