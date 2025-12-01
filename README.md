@@ -10,6 +10,9 @@ cd my-app
 npm install # or yarn
 npm run dev
 ```
+go to your browser and connect to  
+http://localhost:3000  
+to view the app in full  
 
 # MIT LICENSE
 
