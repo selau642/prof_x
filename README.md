@@ -14,13 +14,13 @@ to
 y + [x] = 3  
 The app will take care of sign changes.
 
-3. Fraction
+3. Fraction  
 Move x over the equation  
 [x] / y =  z  
 to  
 1 / y = z / [x]
 
-4. Bracket Multiplication
+4. Bracket Multiplication  
 [x] (a + b) = 4
 to  
 [x]a + [x]b = 4
