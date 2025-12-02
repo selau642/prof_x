@@ -1,10 +1,36 @@
 # PROF X
-Professor X lets you manipulate math variables in equations to do algebra transformations.
-Its build with Svelte and Typescript.
-        
-![til](https://raw.githubusercontent.com/selau642/prof_x/master/my-app/static/EquationManipulation.gif)
+Professor X lets you manipulate math equations using your mouse, to do algebra transformations.  
+By playing with these equations, you will gain a basic understanding of algebric rules.  
+![til](https://raw.githubusercontent.com/selau642/prof_x/master/my-app/static/EquationManipulation.gif)  
+  
+## Functionality
+1. Select  
+Click and Drag your mouse to create a selection box. Math variables under the box will be selected.  
+  
+2. Move variables
+After selecting a variable like x, click on the pointer on the top to move the variable  
+  
+[x] + y = 3 
+
+to 
+
+y + [x] = 3  
+  
+The app will take care of sign changes.
+
+3. Fraction
+Move x over the equation  
+[x] / y =  z  
+to  
+1 / y = z / [x]
+
+4. Bracket Multiplication
+[x] (a + b) = 4
+to  
+[x]a + [x]b = 4
 
 # INSTALL 
+This app is build with Svelte and Typescript
 ```bash
 cd my-app
 npm install # or yarn
