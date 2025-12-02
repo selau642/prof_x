@@ -7,15 +7,11 @@ By playing with these equations, you will gain a basic understanding of algebric
 1. Select  
 Click and Drag your mouse to create a selection box. Math variables under the box will be selected.  
   
-2. Move variables
+2. Move variables  
 After selecting a variable like x, click on the pointer on the top to move the variable  
-  
 [x] + y = 3 
-
 to 
-
 y + [x] = 3  
-  
 The app will take care of sign changes.
 
 3. Fraction
